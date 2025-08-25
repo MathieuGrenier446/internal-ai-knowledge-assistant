@@ -1,26 +1,59 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin './hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Neutral / Base */
+  --color-background: #1F1C27;
+  --color-foreground: #F1F1F1;
+  --color-surface: #353042;
+  --color-border: #CDCDCD;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Primary (Blue) - Extended with states */
+  --color-primary-light: #60a5fa;
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-hover: #2563eb;    /* NEW: Specific hover state */
+  --color-primary-active: #1e40af;   /* NEW: Specific active/pressed state */
+  --color-primary-disabled: #93c5fd; /* NEW: Disabled state */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Success (Green) - Extended with states */
+  --color-success-light: #4ade80;
+  --color-success: #22c55e;
+  --color-success-dark: #15803d;
+  --color-success-hover: #16a34a;    /* NEW: Hover state */
+  --color-success-active: #166534;   /* NEW: Active state */
+  --color-success-disabled: #86efac; /* NEW: Disabled state */
+
+  /* Warning (Yellow) - Extended with states */
+  --color-warning-light: #facc15;
+  --color-warning: #eab308;
+  --color-warning-dark: #ca8a04;
+  --color-warning-hover: #d97706;    /* NEW: Hover state */
+  --color-warning-active: #b45309;   /* NEW: Active state */
+  --color-warning-disabled: #fde047; /* NEW: Disabled state */
+
+  /* Danger (Red) - Extended with states */
+  --color-danger-light: #f87171;
+  --color-danger: #ef4444;
+  --color-danger-dark: #b91c1c;
+  --color-danger-hover: #dc2626;     /* NEW: Hover state */
+  --color-danger-active: #991b1b;    /* NEW: Active state */
+  --color-danger-disabled: #fca5a5;  /* NEW: Disabled state */
+
+  /* NEW: Interactive states (for buttons, links, etc.) */
+  --color-interactive-hover: #f3f4f6;     /* Neutral hover */
+  --color-interactive-active: #e5e7eb;    /* Neutral active */
+  --color-interactive-focus: #3b82f6;     /* Focus ring color */
+  --color-interactive-disabled: #9ca3af;  /* Disabled text/border */
+
+  /* NEW: Status colors (for alerts, badges, etc.) */
+  --color-info: #0ea5e9;
+  --color-info-light: #7dd3fc;
+  --color-info-dark: #0369a1;
+  --color-info-bg: #e0f2fe;        /* Background for info alerts */
+
+  /* Fonts */
 }
