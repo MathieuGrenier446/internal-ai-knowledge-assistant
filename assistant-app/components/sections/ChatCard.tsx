@@ -6,13 +6,13 @@ import { cva } from "cva";
 import { cn } from "@/lib/utils";
 
 type ChatCardProps = {
-    message: Message
-}
+  message: Message;
+};
 
 const messageBubble = cva(["p-3 rounded-md max-w-[400px]"], {
   variants: {
     sender: {
-      assistant: ["bg-secondary text-black self-start"],
+      assistant: ["bg-secondary text-black self-center"],
       user: ["bg-primary text-white self-end"],
     },
   },
@@ -22,11 +22,18 @@ const messageBubble = cva(["p-3 rounded-md max-w-[400px]"], {
 });
 
 export default function ChatCard(props: ChatCardProps) {
+  const isAssistant = props.message.sender === "assistant";
   return (
-    <Card className={cn(messageBubble({ sender: props.message.sender }))}>
-      <CardBody>
-        <p>{props.message.content}</p>
-      </CardBody>
-    </Card>
+    <div>
+      {isAssistant ? (
+        <div></div>
+      ) : (
+        <Card className={cn(messageBubble({ sender: props.message.sender }))}>
+          <CardBody>
+            <p>{props.message.content}</p>
+          </CardBody>
+        </Card>
+      )}
+    </div>
   );
 }
