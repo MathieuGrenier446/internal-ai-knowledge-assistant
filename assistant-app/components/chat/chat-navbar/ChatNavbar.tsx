@@ -1,6 +1,4 @@
-import {  Navbar,   NavbarBrand,   NavbarContent,   NavbarItem,   NavbarMenuToggle,  NavbarMenu,  NavbarMenuItem} from "@heroui/navbar";
-import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
-import ChatNavbarCard from "./ChatNavbarCard";
+import { ChatNavbarCard } from "./ChatNavbarCard";
 import { Divider } from "@heroui/divider";
 import { Chat } from "@/types/chat";
 
@@ -8,7 +6,7 @@ type ChatNavbarProps = {
     chats: Chat[],
 }
 
-export default function ChatNavbar(props: ChatNavbarProps) {
+export function ChatNavbar(props: ChatNavbarProps) {
     return (
         <div className="flex px-2">
             <div className="p-2 flex flex-col gap-2">

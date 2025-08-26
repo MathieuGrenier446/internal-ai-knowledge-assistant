@@ -21,7 +21,7 @@ const stateIndicator = cva(["p-2", "rounded-full", "h-fit"], {
     }
 )
 
-export default function ChatNavbarCard(props: ChatNavbarCardProps){ 
+export function ChatNavbarCard(props: ChatNavbarCardProps){ 
     return (
         <Card>
             <CardBody>

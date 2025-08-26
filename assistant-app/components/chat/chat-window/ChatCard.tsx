@@ -21,7 +21,7 @@ const messageBubble = cva(["p-3 rounded-md max-w-[400px]"], {
   },
 });
 
-export default function ChatCard(props: ChatCardProps) {
+export function ChatCard(props: ChatCardProps) {
   const isAssistant = props.message.sender === "assistant";
   return (
     <div>
