@@ -10,6 +10,9 @@ export async function GET(req: NextRequest) {
     );
   }
 
+  console.log(req.body);
+  console.log(req.headers);
+
   const clientId = process.env.JIRA_CLIENT_ID!;
   const clientSecret = process.env.JIRA_CLIENT_SECRET!;
   const redirectUrl = process.env.JIRA_REDIRECT_URL!;
