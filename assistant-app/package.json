@@ -8,7 +8,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate && prisma migrate deploy"
+    "postinstall": "prisma generate",
+    "deploy:migrate": "prisma migrate deploy"
   },
   "dependencies": {
     "@google/genai": "^1.15.0",
