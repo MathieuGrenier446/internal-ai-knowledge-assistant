@@ -1,7 +1,9 @@
-name: deployment
+name: CI/CD
+
 on: [push]
+
 jobs:
-  migrate prisma database:
+  migrate-prisma-database:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -12,8 +14,8 @@ jobs:
         with:
           node-version: "20"
       - name: Install dependencies
-      - run: npm install
+        run: npm install
       - name: Building project
-      - run: npm run build
+        run: npm run build
       - name: Running migration
-      - run: npm run deploy:migrate
+        run: npm run deploy:migrate
