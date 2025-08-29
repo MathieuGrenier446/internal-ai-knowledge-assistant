@@ -1,5 +1,4 @@
 import { getJiraOAuthURL } from "@/services/jira/jira-auth";
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { v4 as uuid } from "uuid";
 import { NextResponse } from "next/server";
@@ -20,8 +19,6 @@ export async function GET() {
   }
 
   const jiraOAuthURL = getJiraOAuthURL(sessionId);
-
-  console.log(jiraOAuthURL);
 
   return NextResponse.redirect(jiraOAuthURL, { status: 302 });
 }
