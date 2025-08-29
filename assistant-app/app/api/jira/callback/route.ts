@@ -34,5 +34,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: data }, { status: 500 });
   }
 
-  return NextResponse.json(data);
+  const res = NextResponse.redirect(new URL("/settings", req.url)); // redirect user somewhere safe
+  res.cookies.set("jira_access_token", data.access_token, {
+    httpOnly: true, // client-side JS can't read it
+    secure: true, // only sent over HTTPS
+    sameSite: "lax", // prevent CSRF
+    path: "/", // available across the site
+    maxAge: data.expires_in, // match token expiry
+  });
+
+  return res;
 }

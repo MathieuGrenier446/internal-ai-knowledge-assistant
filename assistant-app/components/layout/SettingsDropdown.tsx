@@ -7,7 +7,7 @@ import {
 } from "@heroui/dropdown";
 import { Button } from "@heroui/button";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { redirectToJiraOAuth } from "@/services/jira/jira-auth";
+import { openJiraOAuthWindow } from "@/services/jira/jira-auth";
 
 export function SettingsDropdown() {
   return (
@@ -18,10 +18,7 @@ export function SettingsDropdown() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem
-          onClick={async () => await redirectToJiraOAuth()}
-          key="new"
-        >
+        <DropdownItem onClick={() => openJiraOAuthWindow()} key="new">
           Connect To Jira
         </DropdownItem>
       </DropdownMenu>
