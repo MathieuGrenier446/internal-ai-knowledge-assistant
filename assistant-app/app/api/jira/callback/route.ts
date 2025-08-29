@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: data }, { status: 500 });
   }
 
-  const res = NextResponse.redirect(new URL("/settings", req.url)); // redirect user somewhere safe
+  const res = NextResponse.redirect(new URL("/jira/success", req.url)); // redirect user somewhere safe
   res.cookies.set("jira_access_token", data.access_token, {
     httpOnly: true, // client-side JS can't read it
     secure: true, // only sent over HTTPS
