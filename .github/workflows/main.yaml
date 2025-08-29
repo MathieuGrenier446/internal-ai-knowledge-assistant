@@ -17,5 +17,7 @@ jobs:
         run: npm install
       - name: Building project
         run: npm run build
+      - name: Post build
+        run: npm run postinstall
       - name: Running migration
         run: npm run deploy:migrate
