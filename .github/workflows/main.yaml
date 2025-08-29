@@ -5,6 +5,7 @@ on: [push]
 jobs:
   migrate-prisma-database:
     runs-on: ubuntu-latest
+    environment: production
     defaults:
       run:
         working-directory: ./assistant-app
