@@ -21,5 +21,7 @@ export async function GET() {
 
   const jiraOAuthURL = getJiraOAuthURL(sessionId);
 
+  console.log(jiraOAuthURL);
+
   return NextResponse.redirect(jiraOAuthURL, { status: 302 });
 }
