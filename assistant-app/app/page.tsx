@@ -1,3 +1,4 @@
+"use client";
 import { Chat } from "@/features/chat/components/Chat";
 import { Navbar } from "@/components/layout/Navbar";
 
