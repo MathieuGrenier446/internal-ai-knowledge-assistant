@@ -1,21 +1,20 @@
-import { Chat } from "@prisma/client";
 import { ChatNavbarCard } from "./ChatNavbarCard";
 import { Divider } from "@heroui/divider";
+import { useAllChats } from "../../hooks";
 
-type ChatNavbarProps = {
-  chats: Chat[];
-};
+export function ChatNavbar() {
+  const { data: fetchedChats, isLoading } = useAllChats();
+  const chats = fetchedChats === undefined ? [] : fetchedChats;
 
-export function ChatNavbar(props: ChatNavbarProps) {
   return (
-    <div className="flex px-2 w-full">
+    <div className="flex w-3xs">
       <div className="p-2 flex flex-col gap-2 w-full">
-        {props.chats.length > 0 ? (
-          props.chats.map((chat, index) => (
-            <ChatNavbarCard key={index} chat={chat} />
+        {chats.length > 0 ? (
+          chats.map((chat, index) => (
+            <ChatNavbarCard key={index} chat={chat} isLoading={isLoading} />
           ))
         ) : (
-          <ChatNavbarCard />
+          <ChatNavbarCard isLoading={isLoading} />
         )}
       </div>
       <Divider orientation="vertical" />

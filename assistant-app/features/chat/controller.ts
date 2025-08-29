@@ -1,5 +1,6 @@
 import { Chat } from "@prisma/client";
-import { ChatWithMessages } from "@/features/chat/types";
+import { ChatWithMessages } from "@/features/chat/utils/types";
+import { CustomError, ErrorCode } from "@/lib/errors";
 
 /**
  * Fetch all chats
@@ -36,18 +37,32 @@ export async function createChatWithMessage(
 }
 
 /**
- * Create a new message in a chat
+ * Sends a message to the server and gets an AI response back.
+ * @param chatId
+ * @param content
+ * @returns
  */
-export async function createMessage(
-  chatId: string,
-  content: string,
-): Promise<any> {
-  const res = await fetch(`/api/chats/${chatId}/ask`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ sender: "USER", content }),
-  });
+export async function createMessage(chatId: string, content: string) {
+  try {
+    const res = await fetch(`/api/chats/${chatId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content }),
+    });
 
-  if (!res.ok) throw new Error("Failed to send message");
-  return res.json();
+    const data = await res.json();
+
+    if (!res.ok) {
+      const serverCode = data?.code as ErrorCode | undefined;
+      if (serverCode && Object.values(ErrorCode).includes(serverCode)) {
+        throw new CustomError({ code: serverCode });
+      }
+      throw new CustomError({ code: ErrorCode.UNKNOWN_ERROR });
+    }
+
+    return data.assistantMessage;
+  } catch (error) {
+    if (error instanceof CustomError) throw error;
+    throw new CustomError({ code: ErrorCode.UNKNOWN_ERROR });
+  }
 }

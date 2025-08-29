@@ -1,4 +1,4 @@
-import { Message } from "@/types/chat";
+import { Message } from "@prisma/client";
 
 export type ChatCardProps = {
   message: Message;
