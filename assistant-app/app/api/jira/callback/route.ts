@@ -1,3 +1,9 @@
+import {
+  JIRA_CLIENT_ID,
+  JIRA_CLIENT_SECRET,
+  JIRA_REDIRECT_URL,
+} from "@/lib/jira/constants";
+import { setJiraAuthToken, setJiraCloudId } from "@/lib/jira/jira-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -10,13 +16,6 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  console.log(req.body);
-  console.log(req.headers);
-
-  const clientId = process.env.JIRA_CLIENT_ID!;
-  const clientSecret = process.env.JIRA_CLIENT_SECRET!;
-  const redirectUrl = process.env.JIRA_REDIRECT_URL!;
-
   const response = await fetch("https://auth.atlassian.com/oauth/token", {
     method: "POST",
     headers: {
@@ -24,10 +23,10 @@ export async function GET(req: NextRequest) {
     },
     body: JSON.stringify({
       grant_type: "authorization_code",
-      client_id: clientId,
-      client_secret: clientSecret,
+      client_id: JIRA_CLIENT_ID,
+      client_secret: JIRA_CLIENT_SECRET,
       code,
-      redirect_uri: redirectUrl,
+      redirect_uri: JIRA_REDIRECT_URL,
     }),
   });
 
@@ -37,14 +36,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: data }, { status: 500 });
   }
 
-  const res = NextResponse.redirect(new URL("/jira/success", req.url)); // redirect user somewhere safe
-  res.cookies.set("jira_access_token", data.access_token, {
-    httpOnly: true, // client-side JS can't read it
-    secure: true, // only sent over HTTPS
-    sameSite: "lax", // prevent CSRF
-    path: "/", // available across the site
-    maxAge: data.expires_in, // match token expiry
-  });
+  const res = NextResponse.redirect(new URL("/jira/success", req.url));
+  await setJiraAuthToken(data.access_token, data.expires_in);
+  await setJiraCloudId();
 
   return res;
 }

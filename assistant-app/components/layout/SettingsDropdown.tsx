@@ -7,7 +7,7 @@ import {
 } from "@heroui/dropdown";
 import { Button } from "@heroui/button";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { openJiraOAuthWindow } from "@/services/jira/jira-auth";
+import { openJiraOAuthWindow } from "@/lib/jira/jira-auth-pop-up";
 
 export function SettingsDropdown() {
   return (

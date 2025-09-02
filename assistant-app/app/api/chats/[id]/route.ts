@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/services/db/prisma";
-import { generateResponse } from "@/services/llm/generation";
+import { prisma } from "@/lib/db/prisma";
+import { generateResponse } from "@/lib/llm/generation";
 import { CustomError, ErrorCode } from "@/lib/errors";
 import { Sender } from "@prisma/client";
 

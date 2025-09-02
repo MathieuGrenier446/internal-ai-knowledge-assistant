@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/services/db/prisma";
-import { generateSuggestedTitle } from "@/services/llm/generation";
+import { prisma } from "@/lib/db/prisma";
+import { generateSuggestedTitle } from "@/lib/llm/generation";
 
 export async function GET() {
   const chats = await prisma.chat.findMany({

@@ -1,4 +1,4 @@
-import { googleGenAiClient } from "@/services/llm/gemini";
+import { googleGenAiClient } from "@/lib/llm/gemini";
 
 export async function generateSuggestedTitle(message: string) {
   const response = await googleGenAiClient.models.generateContent({

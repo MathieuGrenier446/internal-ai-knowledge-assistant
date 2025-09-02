@@ -1,8 +1,18 @@
 export interface JiraAuthConfig {
-  domain: string; // e.g. "your-domain.atlassian.net"
-  email: string; // your Jira account email
-  apiToken: string; // API token from Atlassian
+  accessToken: string;
+  cloudId: string;
+  domain: string;
 }
+
+interface JiraAccessibleResource {
+  id: string;
+  name: string;
+  url: string;
+  scopes: string[];
+  avatarUrl: string;
+}
+
+export type JiraAccessibleResources = JiraAccessibleResource[];
 
 export interface JiraProject {
   id: string;
